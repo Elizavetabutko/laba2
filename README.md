@@ -24,7 +24,6 @@
 ```java
 import java.io.PrintStream;
 import java.util.Scanner;
-import java.util.Arrays;
 public class Main {
     public static Scanner in = new Scanner(System.in);
     public static PrintStream out = System.out;
@@ -51,15 +50,26 @@ public class Main {
             }
         }
         double[] mm = new double [n]; // медиана каждой строки
+        int[]cc = new int [m]; // создаем копию массива
         for (int i = 0; i<n; i++){
-            int[] c = Arrays.copyOf(a[i],a[i].length);
-            Arrays.sort(c);
-            if (m%2!=0){
-                mm[i] = c[m/2];
+            for (int j = 0; j<m; j++){
+                cc[j] = a[i][j];
             }
-            else{
-                mm[i] = (c[m/2]+c[m/2-1])/2.0;
+          for (int j = 0; j<m-1; j++) { // сортируем строки массива
+            for (int k = 0; k<m-1-j; k++) {
+              if (cc[k] > cc[k + 1]) {
+                int e = cc[k];
+                cc[k] = cc[k + 1];
+                cc[k + 1] = e;
+              }
             }
+          }
+          if (m % 2 != 0){
+            mm[i] = cc[m/2];
+          } 
+          else {
+            mm[i] = (cc[m/2] + cc[m/2-1])/2.0;
+          }
         }
         double[] dd = new double [n]; // дисперсия каждой строки
         for (int i = 0; i<n; i++){ 
