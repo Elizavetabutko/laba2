@@ -32,22 +32,22 @@ public class Main {
         int m = in.nextInt(); // количество столбцов
         int[][] a = new int [n][m]; 
         for (int i = 0; i < n; i++){ // заполняем массив значениями
-            for (int j = 0; j < m; j++){
-                a[i][j] = in.nextInt();
-            }
+          for (int j = 0; j < m; j++){
+            a[i][j] = in.nextInt();
+          }
         }
         out.println("Исходный массив"); // выводим исходный массив
         for (int i = 0; i<n; i++){
-            for (int j = 0; j<m; j++){
-                out.print(a[i][j]+" ");
-            }
-            out.println();
+          for (int j = 0; j<m; j++){
+            out.print(a[i][j]+" ");
+          }
+          out.println();
         }
         int[] ss = new int [n]; // сумма элементов каждой строки
         for (int i = 0; i<n; i++){ 
-            for (int j = 0; j<m; j++){
-                ss[i] = ss[i] + a[i][j];
-            }
+          for (int j = 0; j<m; j++){
+            ss[i] = ss[i] + a[i][j];
+          }
         }
         double[] mm = new double [n]; // медиана каждой строки
         int[]cc = new int [m]; // создаем копию массива
@@ -55,12 +55,12 @@ public class Main {
           for (int j = 0; j<m; j++){
             cc[j] = a[i][j];
           }
-          for (int l = 0; l<m-1; l++) { // сортируем строки массива
-            for (int l = 0; l<m-1-j; l++) {
-              if (cc[l] > cc[l + 1]) {
-                int e = cc[l];
-                cc[l] = cc[l + 1];
-                cc[l + 1] = e;
+          for (int j = 0; j<m-1; j++) { // сортируем строки массива
+            for (int k = 0; k<m-1-j; k++) {
+              if (cc[k] > cc[k + 1]) {
+                int e = cc[k];
+                cc[k] = cc[k + 1];
+                cc[k + 1] = e;
               }
             }
           }
