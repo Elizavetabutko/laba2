@@ -52,15 +52,15 @@ public class Main {
         double[] mm = new double [n]; // медиана каждой строки
         int[]cc = new int [m]; // создаем копию массива
         for (int i = 0; i<n; i++){
-            for (int j = 0; j<m; j++){
-                cc[j] = a[i][j];
-            }
-          for (int j = 0; j<m-1; j++) { // сортируем строки массива
-            for (int k = 0; k<m-1-j; k++) {
-              if (cc[k] > cc[k + 1]) {
-                int e = cc[k];
-                cc[k] = cc[k + 1];
-                cc[k + 1] = e;
+          for (int j = 0; j<m; j++){
+            cc[j] = a[i][j];
+          }
+          for (int l = 0; l<m-1; l++) { // сортируем строки массива
+            for (int l = 0; l<m-1-j; l++) {
+              if (cc[l] > cc[l + 1]) {
+                int e = cc[l];
+                cc[l] = cc[l + 1];
+                cc[l + 1] = e;
               }
             }
           }
@@ -73,74 +73,74 @@ public class Main {
         }
         double[] dd = new double [n]; // дисперсия каждой строки
         for (int i = 0; i<n; i++){ 
-            double sr = (double)ss[i]/m; // среднее арифметическое строки
-            for (int j = 0; j<m; j++){
-                dd[i] = dd[i]+(a[i][j]-sr)*(a[i][j]-sr);
-            }
-            dd[i] = dd[i]/m;
+          double sr = (double)ss[i]/m; // среднее арифметическое строки
+          for (int j = 0; j<m; j++){
+            dd[i] = dd[i]+(a[i][j]-sr)*(a[i][j]-sr);
+          }
+          dd[i] = dd[i]/m;
         }
         int[][]aa = new int [n][m]; // создаем копию массива
         for (int i = 0; i<n; i++){
-            for (int j = 0; j<m; j++){
-                aa[i][j] = a[i][j];
-            }
+          for (int j = 0; j<m; j++){
+            aa[i][j] = a[i][j];
+          }
         }
         for (int i = 0; i<n-1; i++){ // сортируем строки массива пузырьком
-            for (int j = 0; j<n-1-i; j++){
-                boolean x = false;
-                if (ss[j]>ss[j+1]){
-                    x = true;
-                }
-                else if (ss[j]==ss[j+1]){
-                    if (mm[j]>mm[j+1]){
-                        x = true;
-                    }
-                    else if (mm[j]==mm[j+1]){
-                        if (dd[j]>dd[j+1]){
-                            x = true;
-                        }
-                    }
-                }
-                if (x){
-                    int[] y = a[j];
-                    a[j] = a[j+1];
-                    a[j+1] = y;
-                    int z = ss[j];
-                    ss[j] = ss[j+1];
-                    ss[j+1] = z;
-                    double k = mm[j];
-                    mm[j] = mm[j+1];
-                    mm[j+1] = k;
-                    double w = dd[j];
-                    dd[j] = dd[j+1];
-                    dd[j+1] = w;
-                }
+          for (int j = 0; j<n-1-i; j++){
+            boolean x = false;
+            if (ss[j]>ss[j+1]){
+              x = true;
             }
+            else if (ss[j]==ss[j+1]){
+              if (mm[j]>mm[j+1]){
+                x = true;
+              }
+              else if (mm[j]==mm[j+1]){
+                if (dd[j]>dd[j+1]){
+                  x = true;
+                }
+              }
+            }
+            if (x){
+              int[] y = a[j];
+              a[j] = a[j+1];
+              a[j+1] = y;
+              int z = ss[j];
+              ss[j] = ss[j+1];
+              ss[j+1] = z;
+              double k = mm[j];
+              mm[j] = mm[j+1];
+              mm[j+1] = k;
+              double w = dd[j];
+              dd[j] = dd[j+1];
+              dd[j+1] = w;
+            }
+          }
         }
         out.println("Полученный массив"); // выводим полученный массив
         for (int i = 0; i<n; i++){
-            for (int j = 0; j<m; j++){
-                out.print(a[i][j]+" ");
-            }
-            out.println();
+          for (int j = 0; j<m; j++){
+            out.print(a[i][j]+" ");
+          }
+          out.println();
         }
         int[] mins = new int [m]; // минимальный элемент в столбце
         for (int j = 0; j<m; j++){
-            int min = aa[0][j];
-            for (int i = 1; i<n; i++){
-                if (aa[i][j]<min){
-                    min = aa[i][j];
-                }
+          int min = aa[0][j];
+          for (int i = 1; i<n; i++){
+            if (aa[i][j]<min){
+              min = aa[i][j];
             }
-            mins[j] = min;
+          }
+          mins[j] = min;
         }
         int max = mins[0];
         int q = 0;
         for (int j = 0; j<m; j++){ // находим максимальный из минимальных
-            if (mins[j]>max){
-                max = mins[j];
-                q = j;
-            }
+          if (mins[j]>max){
+            max = mins[j];
+            q = j;
+          }
         }
         out.print("Максимальный элемент из всех минимальных элементов: ");
         out.print(max);
@@ -156,48 +156,55 @@ public class Main {
         int r = 0; // строка
         int c = 0; // столбец
         for (int i = 0; i < t; i++) {
-            out.print(aa[r][c] + " ");
-            if (d == 0) { 
-                if (c == right) {
-                    up++;
-                    d = 1;
-                    r++;
-                } else {
-                    c++;
-                }
-            } else if (d == 1) { 
-                if (r == down) {
-                    right--;
-                    d = 2;
-                    c--;
-                } else {
-                    r++;
-                }
-            } else if (d == 2) {
-                if (c == left) {
-                    down--;
-                    d = 3;
-                    r--;
-                } else {
-                    c--;
-                }
-            } else {
-                if (r == up) {
-                    left++;
-                    d = 0;
-                    c++;
-                } else {
-                    r--;
-                }
+          out.print(aa[r][c] + " ");
+          if (d == 0) { 
+            if (c == right) {
+              up++;
+              d = 1;
+              r++;
             }
+            else {
+              c++;
+            }
+          }
+          else if (d == 1) { 
+            if (r == down) {
+              right--;
+              d = 2;
+              c--;
+            }
+            else {
+              r++;
+            }
+          }
+          else if (d == 2) {
+            if (c == left) {
+              down--;
+              d = 3;
+              r--;
+            }
+            else {
+              c--;
+            }
+          }
+          else {
+            if (r == up) {
+              left++;
+              d = 0;
+              c++;
+            }
+            else {
+              r--;
+            }
+          }
         }
         out.println();
         out.println("Поворачиваем массив на 90 градусов по часовой стрелке:");
         for (int i = 0; i<m; i++){ //поворачиваем массив на 90 градусов
-            for (int j = n-1; j>=0; j--){
-                out.print(aa[j][i]+" ");
-            }
-            out.println();
+          for (int j = n-1; j>=0; j--){
+            out.print(aa[j][i]+" ");
+          }
+          out.println();
         }
     }
 }
