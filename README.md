@@ -55,7 +55,7 @@ public class Main {
           for (int j = 0; j<m; j++){
             cc[j] = a[i][j];
           }
-          for (int j = 0; j<m-1; j++) { // сортируем строки массива
+          for (int j = 0; j<m-1; j++) { // сортируем элементы в строке
             for (int k = 0; k<m-1-j; k++) {
               if (cc[k] > cc[k + 1]) {
                 int e = cc[k];
